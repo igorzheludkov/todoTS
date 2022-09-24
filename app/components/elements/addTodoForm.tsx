@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 
 import {Text, TextInput, View, Button} from 'react-native';
-import {addNote} from '../reducer/notesSlice';
+import {addNote} from '../../reducer/notesSlice';
 
-import {useAppSelector, useAppDispatch} from './../hooks/reduxHooks';
+import {useAppSelector, useAppDispatch} from '../../hooks/reduxHooks';
 
 // import {addNote} from './../reducer/notesSlice';
 
@@ -12,6 +12,7 @@ export default function AddTodo() {
     title: '',
     description: '',
     date: '',
+    status: 0,
   });
   const dispatch = useAppDispatch();
 
@@ -22,7 +23,6 @@ export default function AddTodo() {
   function inputHandler(value: type, text: type) {
     setForm({...form, [value]: text});
   }
-  console.log(form);
 
   return (
     <View>

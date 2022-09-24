@@ -1,11 +1,13 @@
 import {configureStore} from '@reduxjs/toolkit';
 import notesSlice from './reducer/notesSlice';
+import filterSlice from './reducer/filterSlice';
+import searchSlice from './reducer/searchSlice';
 
 const store = configureStore({
   reducer: {
     notes: notesSlice,
-    // addNote: addNoteReducer,
-    // filter: filterReducer,
+    filter: filterSlice,
+    search: searchSlice,
     // viewMode: viewModeReducer,
   },
 });

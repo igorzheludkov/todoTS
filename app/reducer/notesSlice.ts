@@ -6,6 +6,7 @@ interface NotesArray {
   title: string;
   description: string;
   date: string;
+  status: number;
 }
 
 interface NotesState {
@@ -18,9 +19,24 @@ const initialState: NotesState = {
   notesArray: [
     {
       id: 0,
-      title: 'Hello world',
+      title: 'Hello world1',
       description: 'Детальніше про нотатку',
       date: '2022-09-26T09.00',
+      status: 0,
+    },
+    {
+      id: 1,
+      title: 'Hello world2',
+      description: 'Детальніше про нотатку',
+      date: '2022-09-26T09.00',
+      status: 1,
+    },
+    {
+      id: 2,
+      title: 'Hello world3',
+      description: 'Детальніше про нотатку',
+      date: '2022-09-26T09.00',
+      status: 0,
     },
   ],
   loading: false,
@@ -46,12 +62,16 @@ const notesSlice = createSlice({
         notesArray: [...state.notesArray.filter(i => i.id !== action.payload)],
       };
     },
-    // removeNote: state => {
-    //   state.value -= 1;
-    // },
-    // removeAll: (state, action: PayloadAction<number>) => {
-    //   state.value += action.payload;
-    // },
+    setNoteStatus: (state, action: PayloadAction<string>) => {
+      return state.notesArray.forEach(element => {
+        if (element.id === action.payload) {
+          element.status === 1 ? (element.status = 0) : (element.status = 1);
+        }
+      });
+    },
+    clearState: (state, action: PayloadAction<boolean>) => {
+      return {...initialState};
+    },
   },
 });
 
@@ -59,7 +79,8 @@ function nextTodoId(todos: any) {
   return todos.length + 1;
 }
 
-export const {addNote, removeNote} = notesSlice.actions;
+export const {addNote, removeNote, setNoteStatus, clearState} =
+  notesSlice.actions;
 
 export const selectNotes = (state: RootState) => state.notes;
 

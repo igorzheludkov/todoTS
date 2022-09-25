@@ -5,7 +5,7 @@ interface NotesArray {
   id: number;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   status: number;
 }
 
@@ -21,21 +21,21 @@ const initialState: NotesState = {
       id: 0,
       title: 'Hello world1',
       description: 'Детальніше про нотатку',
-      date: '2022-09-26T09.00',
+      date: new Date(),
       status: 0,
     },
     {
       id: 1,
       title: 'Hello world2',
       description: 'Детальніше про нотатку',
-      date: '2022-09-26T09.00',
+      date: new Date(),
       status: 1,
     },
     {
       id: 2,
       title: 'Hello world3',
       description: 'Детальніше про нотатку',
-      date: '2022-09-26T09.00',
+      date: new Date(),
       status: 0,
     },
   ],

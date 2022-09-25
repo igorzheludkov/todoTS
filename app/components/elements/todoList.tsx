@@ -42,7 +42,14 @@ export default function TodoList() {
         <View style={style.card} key={i.id}>
           <Text style={style.title}>{i.title}</Text>
           <Text style={style.description}>{i.description}</Text>
-          <Text style={style.description}>{i.date}</Text>
+          {/* Дописати функцію для гарного відображення дати та часу */}
+          <Text style={style.description}>
+            Дата {i.date.getDate()}.{i.date.getMonth() + 1}.
+            {i.date.getFullYear()}
+          </Text>
+          <Text style={style.description}>
+            Час {i.date.getHours()}.{i.date.getMinutes()}
+          </Text>
           <View style={style.wrapperBtn}>
             <ButtonRemoveTask onPress={() => dispatch(removeNote(i.id))}>
               Видалити

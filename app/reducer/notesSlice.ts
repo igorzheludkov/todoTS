@@ -1,13 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import type {RootState} from '../store';
+import getDate from './../lib/getDate';
+import NotesArray from '../interfaceAndTypes/notesArrayInterface';
 
-interface NotesArray {
-  id: number;
-  title: string;
-  description: string;
-  date: Date;
-  status: number;
-}
+const date = getDate(new Date());
 
 interface NotesState {
   notesArray: NotesArray[];
@@ -21,22 +17,25 @@ const initialState: NotesState = {
       id: 0,
       title: 'Hello world1',
       description: 'Детальніше про нотатку',
-      date: new Date(),
+      date: date.dateRender,
       status: 0,
+      picture: '',
     },
     {
       id: 1,
       title: 'Hello world2',
       description: 'Детальніше про нотатку',
-      date: new Date(),
+      date: date.dateRender,
       status: 1,
+      picture: '',
     },
     {
       id: 2,
       title: 'Hello world3',
       description: 'Детальніше про нотатку',
-      date: new Date(),
+      date: date.dateRender,
       status: 0,
+      picture: '',
     },
   ],
   loading: false,

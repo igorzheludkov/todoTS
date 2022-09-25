@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
 import {ButtonCheckbox, ButtonRemoveTask} from './../ui/buttons';
 
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Image} from 'react-native';
 
 import {useAppSelector, useAppDispatch} from './../../hooks/reduxHooks';
 
@@ -42,14 +42,13 @@ export default function TodoList() {
         <View style={style.card} key={i.id}>
           <Text style={style.title}>{i.title}</Text>
           <Text style={style.description}>{i.description}</Text>
-          {/* Дописати функцію для гарного відображення дати та часу */}
           <Text style={style.description}>
-            Дата {i.date.getDate()}.{i.date.getMonth() + 1}.
-            {i.date.getFullYear()}
+            Дата {i.date.day}.{i.date.month}.{i.date.year}
           </Text>
           <Text style={style.description}>
-            Час {i.date.getHours()}.{i.date.getMinutes()}
+            Час {i.date.hour}.{i.date.minutes}
           </Text>
+          {i.picture && <Image style={style.image} source={{uri: i.picture}} />}
           <View style={style.wrapperBtn}>
             <ButtonRemoveTask onPress={() => dispatch(removeNote(i.id))}>
               Видалити
@@ -89,5 +88,10 @@ const style = StyleSheet.create({
     alignSelf: 'flex-end',
     marginTop: 20,
     // backgroundColor: 'grey'
+  },
+  image: {
+    width: 180,
+    height: 150,
+    borderRadius: 5,
   },
 });

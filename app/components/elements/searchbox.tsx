@@ -27,7 +27,7 @@ export default function SearchBox() {
 const style = StyleSheet.create<Styles>({
   textInput: {
     width: 220,
-    backgroundColor: 'grey',
+    backgroundColor: 'lightgrey',
     borderRadius: 5,
     padding: 5,
   },

@@ -1,9 +1,9 @@
 interface Date {
-  year: number;
-  month: number;
-  day: number;
-  hour: number;
-  minutes: number;
+  year: string;
+  month: string;
+  day: string;
+  hour: string;
+  minutes: string;
 }
 
 interface NotesArray {

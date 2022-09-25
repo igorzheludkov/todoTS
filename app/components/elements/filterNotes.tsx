@@ -3,11 +3,14 @@ import {ButtonFilterNote} from './../ui/buttons';
 
 import {View, StyleSheet} from 'react-native';
 
-import {useAppDispatch} from './../../hooks/reduxHooks';
+import {useAppDispatch, useAppSelector} from './../../hooks/reduxHooks';
 
 import {setFilter} from '../../reducer/filterSlice';
 
 export default function FilterNotes() {
+  const filter = useAppSelector(state => state.filter);
+  console.log(filter.filterStatus);
+
   const dispatch = useAppDispatch();
 
   const filterLabels = [
@@ -20,7 +23,9 @@ export default function FilterNotes() {
     <View style={style.wrapper}>
       {filterLabels.map(i => (
         <View style={style.element} key={i.id}>
-          <ButtonFilterNote onPress={() => dispatch(setFilter(i.id))}>
+          <ButtonFilterNote
+            active={filter.filterStatus === i.id}
+            onPress={() => dispatch(setFilter(i.id))}>
             {i.name}
           </ButtonFilterNote>
         </View>

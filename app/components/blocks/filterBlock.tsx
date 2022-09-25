@@ -16,7 +16,7 @@ export default function FilterBlock() {
           onPress={() => {
             dispatch(clearState(true));
           }}>
-          Видалити нотатки
+          Видалити все
         </ButtonRemove>
       </View>
     </View>

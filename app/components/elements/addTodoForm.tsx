@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import DatePicker from 'react-native-date-picker';
 import {launchImageLibrary} from 'react-native-image-picker';
 
-import {TextInput, View, Button, Text, Image, StyleSheet} from 'react-native';
+import {TextInput, View, Text, Image, StyleSheet} from 'react-native';
+import {ButtonSubmit, ButtonEdit} from '../ui/buttons';
 import {addNote} from '../../reducer/notesSlice';
 
 import {useAppDispatch} from '../../hooks/reduxHooks';
@@ -11,7 +12,7 @@ import NotesArray from '../../interfaceAndTypes/notesArrayInterface';
 
 import getDate from '../../lib/getDate';
 
-export default function AddTodoForm({navigation}) {
+export default function AddTodoForm({navigation}: any) {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const date = getDate(new Date());
 
@@ -49,17 +50,28 @@ export default function AddTodoForm({navigation}) {
   }
 
   return (
-    <View>
+    <View style={style.container}>
       <TextInput
+        style={style.inputTitle}
         value={form.title}
         placeholder="Введіть заголовок"
         onChangeText={text => inputHandler('title', text)}
       />
       <TextInput
+        style={style.inputDescription}
         value={form.description}
         placeholder="Введіть детальний опис"
         onChangeText={text => inputHandler('description', text)}
       />
+      <View style={style.daytime}>
+        <Text>
+          Дата {form.date.day}.{form.date.month}.{form.date.year}
+          {'   '}
+        </Text>
+        <Text>
+          Час {form.date.hour}.{form.date.minutes}
+        </Text>
+      </View>
       {form.picture && <Image style={style.pic} source={{uri: form.picture}} />}
       <DatePicker
         modal
@@ -73,26 +85,50 @@ export default function AddTodoForm({navigation}) {
           setOpenDatePicker(false);
         }}
       />
-      <Text>
-        Дата {form.date.day}.{form.date.month}.{form.date.year}
-      </Text>
-      <Text>
-        Час {form.date.hour}.{form.date.minutes}
-      </Text>
-      <Button title="Додати зображення" color="#841584" onPress={picHandler} />
-      <Button
-        title="Змінити дату"
-        color="#841584"
-        onPress={() => setOpenDatePicker(true)}
-      />
-      <Button title="Зберегти" color="#841584" onPress={submitHandler} />
+
+      <View style={style.buttonsContainer}>
+        <ButtonEdit onPress={picHandler}>Додати зображення</ButtonEdit>
+        <ButtonEdit onPress={() => setOpenDatePicker(true)}>
+          Змінити дату
+        </ButtonEdit>
+      </View>
+      <ButtonSubmit onPress={submitHandler}>Зберегти</ButtonSubmit>
     </View>
   );
 }
 
 const style = StyleSheet.create({
   pic: {
-    width: 200,
+    // width: 200,
     height: 180,
+  },
+  container: {
+    paddingVertical: 20,
+  },
+  inputTitle: {
+    padding: 5,
+    margin: 5,
+    backgroundColor: 'lightgrey',
+    borderRadius: 5,
+    height: 40,
+  },
+  inputDescription: {
+    padding: 5,
+    margin: 5,
+    backgroundColor: 'lightgrey',
+    borderRadius: 5,
+    height: 120,
+  },
+  buttonsContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingVertical: 30,
+  },
+  daytime: {
+    // width: 300,
+    paddingVertical: 20,
+    paddingHorizontal: 5,
+    // flex: 1,
+    flexDirection: 'row',
   },
 });

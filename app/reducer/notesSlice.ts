@@ -15,7 +15,7 @@ const initialState: NotesState = {
   notesArray: [
     {
       id: 0,
-      title: 'Hello world1',
+      title: 'Hello world 1',
       description: 'Детальніше про нотатку',
       date: date.dateRender,
       status: 0,
@@ -23,15 +23,23 @@ const initialState: NotesState = {
     },
     {
       id: 1,
-      title: 'Hello world2',
-      description: 'Детальніше про нотатку',
+      title: 'Hello world 2',
+      description: 'Нотатка позначена як виконана',
       date: date.dateRender,
       status: 1,
       picture: '',
     },
     {
       id: 2,
-      title: 'Hello world3',
+      title: 'Hello world 3',
+      description: 'Детальніше про нотатку',
+      date: date.dateRender,
+      status: 0,
+      picture: '',
+    },
+    {
+      id: 3,
+      title: 'Hello world 4',
       description: 'Детальніше про нотатку',
       date: date.dateRender,
       status: 0,
@@ -70,7 +78,7 @@ const notesSlice = createSlice({
     },
     clearState: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
-        return {...initialState};
+        return {...state, notesArray: []};
       }
     },
   },

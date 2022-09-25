@@ -13,6 +13,8 @@ export default function TodoList() {
   const search = useAppSelector(state => state.search);
   const dispatch = useAppDispatch();
 
+  console.log(notes);
+
   const [filtered, setFiltered] = useState(notes.notesArray);
 
   useEffect(() => {
@@ -39,15 +41,20 @@ export default function TodoList() {
   return (
     <View style={style.wrapper}>
       {render.map(i => (
-        <View style={style.card} key={i.id}>
+        <View
+          style={i.status ? [style.card, style.toggleColor] : [style.card]}
+          key={i.id}>
           <Text style={style.title}>{i.title}</Text>
           <Text style={style.description}>{i.description}</Text>
-          <Text style={style.description}>
-            Дата {i.date.day}.{i.date.month}.{i.date.year}
-          </Text>
-          <Text style={style.description}>
-            Час {i.date.hour}.{i.date.minutes}
-          </Text>
+          <View style={style.daytime}>
+            <Text style={style.daytimeLabel}>
+              Дата {i.date.day}.{i.date.month}.{i.date.year}
+              {'   '}
+            </Text>
+            <Text style={style.daytimeLabel}>
+              Час {i.date.hour}.{i.date.minutes}
+            </Text>
+          </View>
           {i.picture && <Image style={style.image} source={{uri: i.picture}} />}
           <View style={style.wrapperBtn}>
             <ButtonRemoveTask onPress={() => dispatch(removeNote(i.id))}>
@@ -78,20 +85,33 @@ const style = StyleSheet.create({
   },
   title: {
     fontSize: 24,
+    marginBottom: 10,
   },
   description: {
     fontSize: 16,
   },
+  daytime: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingVertical: 5,
+  },
+  daytimeLabel: {
+    color: 'grey',
+  },
   wrapperBtn: {
     flex: 1,
     flexDirection: 'row',
-    alignSelf: 'flex-end',
+    // alignSelf: 'center',
+    justifyContent: 'space-between',
     marginTop: 20,
     // backgroundColor: 'grey'
   },
   image: {
-    width: 180,
+    width: '100%',
     height: 150,
     borderRadius: 5,
+  },
+  toggleColor: {
+    backgroundColor: '#DBFFE5',
   },
 });

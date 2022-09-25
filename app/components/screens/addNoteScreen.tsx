@@ -1,11 +1,11 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ScrollView} from 'react-native';
 import AddTodoForm from '../elements/addTodoForm';
 
-export default function AddNoteScreen({navigation}) {
+export default function AddNoteScreen({navigation}: any) {
   return (
-    <View>
+    <ScrollView>
       <AddTodoForm navigation={navigation} />
-    </View>
+    </ScrollView>
   );
 }

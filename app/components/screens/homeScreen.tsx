@@ -1,13 +1,11 @@
 import React from 'react';
-import {View, Text, Button, ScrollView} from 'react-native';
-import HeaderBlock from '../blocks/headerBlock';
+import {View, ScrollView} from 'react-native';
 import BodyBlock from '../blocks/bodyBlock';
 import FilterBlock from '../blocks/filterBlock';
 
-export default function HomeScreen({navigation}) {
+export default function HomeScreen() {
   return (
     <View>
-      <HeaderBlock navigation={navigation} />
       <ScrollView>
         <FilterBlock />
         <BodyBlock />

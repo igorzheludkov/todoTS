@@ -47,7 +47,7 @@ const notesSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    addNote: (state, action: PayloadAction<number>) => {
+    addNote: (state, action: PayloadAction<NotesArray>) => {
       return {
         ...state,
         notesArray: [
@@ -62,7 +62,7 @@ const notesSlice = createSlice({
         notesArray: [...state.notesArray.filter(i => i.id !== action.payload)],
       };
     },
-    setNoteStatus: (state, action: PayloadAction<string>) => {
+    setNoteStatus: (state, action: PayloadAction<number>) => {
       return state.notesArray.forEach(element => {
         if (element.id === action.payload) {
           element.status === 1 ? (element.status = 0) : (element.status = 1);
@@ -70,7 +70,9 @@ const notesSlice = createSlice({
       });
     },
     clearState: (state, action: PayloadAction<boolean>) => {
-      return {...initialState};
+      if (action.payload) {
+        return {...initialState};
+      }
     },
   },
 });

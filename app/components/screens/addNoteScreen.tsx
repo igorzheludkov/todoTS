@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import AddTodo from '../elements/addTodoForm';
 
-export default function AddNoteScreen({navigation}) {
+export default function AddNoteScreen() {
   return (
     <View>
       <AddTodo />

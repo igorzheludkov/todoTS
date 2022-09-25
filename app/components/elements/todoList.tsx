@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import {ButtonCheckbox, ButtonSubmit} from './../ui/buttons';
+import {ButtonCheckbox, ButtonRemoveTask} from './../ui/buttons';
 
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 
 import {useAppSelector, useAppDispatch} from './../../hooks/reduxHooks';
 
@@ -37,21 +37,50 @@ export default function TodoList() {
   );
 
   return (
-    <View>
+    <View style={style.wrapper}>
       {render.map(i => (
-        <View key={i.id}>
-          <Text>{i.title}</Text>
-          <Text>{i.description}</Text>
-          <ButtonSubmit onPress={() => dispatch(removeNote(i.id))}>
-            Видалити
-          </ButtonSubmit>
-          <ButtonCheckbox
-            status={i.status}
-            onPress={() => dispatch(setNoteStatus(i.id))}>
-            {i.status ? 'Виконано' : 'Невиконано'}
-          </ButtonCheckbox>
+        <View style={style.card} key={i.id}>
+          <Text style={style.title}>{i.title}</Text>
+          <Text style={style.description}>{i.description}</Text>
+          <Text style={style.description}>{i.date}</Text>
+          <View style={style.wrapperBtn}>
+            <ButtonRemoveTask onPress={() => dispatch(removeNote(i.id))}>
+              Видалити
+            </ButtonRemoveTask>
+            <ButtonCheckbox
+              status={i.status}
+              onPress={() => dispatch(setNoteStatus(i.id))}>
+              {i.status ? 'Виконано' : 'Завершити'}
+            </ButtonCheckbox>
+          </View>
         </View>
       ))}
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  wrapper: {
+    // padding: 10,
+  },
+  card: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    padding: 10,
+  },
+  title: {
+    fontSize: 24,
+  },
+  description: {
+    fontSize: 16,
+  },
+  wrapperBtn: {
+    flex: 1,
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginTop: 20,
+    // backgroundColor: 'grey'
+  },
+});

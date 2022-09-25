@@ -1,9 +1,12 @@
 import React from 'react';
-import {View, TextInput, Text} from 'react-native';
-import {ButtonAddNote} from '../ui/buttons';
+import {View, TextInput, StyleSheet, TextStyle} from 'react-native';
 
 import {useAppSelector, useAppDispatch} from './../../hooks/reduxHooks';
 import {setSearch} from './../../reducer/searchSlice';
+
+interface Styles {
+  textInput: TextStyle;
+}
 
 export default function SearchBox() {
   const search = useAppSelector(state => state.search);
@@ -15,8 +18,17 @@ export default function SearchBox() {
         value={search.search}
         placeholder="Пошук"
         onChangeText={text => dispatch(setSearch(text))}
+        style={style.textInput}
       />
-      {/* <ButtonAddNote onPress={props.NavToAddNote}>Додати</ButtonAddNote> */}
     </View>
   );
 }
+
+const style = StyleSheet.create<Styles>({
+  textInput: {
+    width: 220,
+    backgroundColor: 'grey',
+    borderRadius: 5,
+    padding: 5,
+  },
+});

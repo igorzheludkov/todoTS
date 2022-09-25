@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import FilterNotes from '../elements/filterNotes';
 import {ButtonRemove} from '../ui/buttons';
 import {useAppDispatch} from './../../hooks/reduxHooks';
@@ -9,11 +9,28 @@ export default function FilterBlock() {
   const dispatch = useAppDispatch();
 
   return (
-    <View>
+    <View style={style.wrapper}>
       <FilterNotes />
-      <ButtonRemove onPress={() => dispatch(clearState(true))}>
-        Видалити нотатки
-      </ButtonRemove>
+      <View style={style.element}>
+        <ButtonRemove
+          onPress={() => {
+            dispatch(clearState(true));
+          }}>
+          Видалити нотатки
+        </ButtonRemove>
+      </View>
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingHorizontal: 2,
+  },
+  element: {
+    marginHorizontal: 2,
+    marginVertical: 5,
+  },
+});

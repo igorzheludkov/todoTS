@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
 
-import {Text, TextInput, View, Button} from 'react-native';
+import {TextInput, View, Button} from 'react-native';
 import {addNote} from '../../reducer/notesSlice';
 
-import {useAppSelector, useAppDispatch} from '../../hooks/reduxHooks';
-
-// import {addNote} from './../reducer/notesSlice';
+import {useAppDispatch} from '../../hooks/reduxHooks';
 
 export default function AddTodo() {
   const [form, setForm] = useState({
+    id: 0,
     title: '',
     description: '',
     date: '',
@@ -20,7 +19,7 @@ export default function AddTodo() {
     dispatch(addNote(form));
   }
 
-  function inputHandler(value: type, text: type) {
+  function inputHandler(value: string, text: string) {
     setForm({...form, [value]: text});
   }
 
@@ -36,6 +35,7 @@ export default function AddTodo() {
         placeholder="Введіть детальний опис"
         onChangeText={text => inputHandler('description', text)}
       />
+
       <Button title="Додати" color="#841584" onPress={submitHandler} />
     </View>
   );
